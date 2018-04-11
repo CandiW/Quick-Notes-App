@@ -4,7 +4,10 @@ module.exports = (app,mongoUrl) => {
     let MongoDB = require('mongodb').MongoClient;
     
     app.post('/notes',function(req,res){
-        let text = req.body.noteText;
+        //posting the note just fine, just not receiving the note text (says undefined)
+        //not getting note text for some reason?? only returning the date...
+
+        let text = req.body.text;
         //send response to append note to page
         //store note data in db
         let noteData = {
