@@ -1,0 +1,36 @@
+{
+  "name": "quick-notes-app",
+  "version": "1.0.0",
+  "description": "my first full-stack javascript app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node routes/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CandiW/quick-notes-app.git"
+  },
+  "author": "CandiW",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CandiW/quick-notes-app/issues"
+  },
+  "homepage": "https://github.com/CandiW/quick-notes-app#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "masonry-layout": "^4.2.1",
+    "mongodb": "^2.2.33",
+    "randomcolor": "^0.5.3",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "webpack": "^3.10.0"
+  }
+}

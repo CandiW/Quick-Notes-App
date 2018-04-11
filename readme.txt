@@ -1,0 +1,1 @@
+My first note taking app built with React.js, Node.js, Express, and MongoDB.

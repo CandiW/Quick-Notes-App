@@ -1,0 +1,68 @@
+
+body {
+    margin: 0 auto;
+    background-color: lightgrey;
+}
+
+h1 {
+    margin-top: 50px;
+}
+
+h2 {
+    font-size: 50px;
+}
+
+.new-note {
+    display: inline-block;
+    padding: 5px;
+    font-size: 25px;
+}
+
+.fa-plus-circle {
+    color: rgb(29, 34, 34);
+    font-size: 35px;
+}
+
+#form-container {
+    min-height: 350px;
+    max-height: 600px;
+    min-width: 300px;
+    max-width: 600px;
+    opacity: .75;
+    border-top-right-radius: 15px;
+    box-shadow: 10px 5px 5px;
+}
+
+.form-group {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.pull-right {
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.grid-item {
+    width: 30%;
+}
+
+#dark-theme {
+    background-color: #6E828A;
+    margin: 5px 5px 5px 5px;
+}
+
+#light-theme {
+    background-color: #0D8ABC;
+    margin: 5px 5px 5px 5px;
+}
+
+#purple-theme {
+    background-color: #780662;
+    margin: 5px 5px 5px 5px;
+}
+
+#surpriseme-theme {
+    background-color: yellowgreen;
+    margin: 5px 5px 5px 5px;
+}
