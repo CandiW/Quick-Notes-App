@@ -7,7 +7,7 @@ module.exports = (app,mongoUrl) => {
         //posting the note just fine, just not receiving the note text (says undefined)
         //not getting note text for some reason?? only returning the date...
 
-        let text = req.body.text;
+        let text = req.body.name;
         //send response to append note to page
         //store note data in db
         let noteData = {
@@ -23,7 +23,7 @@ module.exports = (app,mongoUrl) => {
                 db.close();
         });
 
-        res.status(201).json(noteData);
+        res.status(201).send(noteData);
 
     });
 

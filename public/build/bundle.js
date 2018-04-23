@@ -1004,7 +1004,7 @@ var Notes = function (_Component) {
 }(_react.Component);
 
 var defaultStyle = {
-  backgroundColor: "yellow",
+  backgroundColor: (0, _randomcolor2.default)(),
   opacity: ".7",
   borderLeft: "5px solid " + (0, _randomcolor2.default)(),
   color: "black"
@@ -1091,7 +1091,7 @@ var App = function (_Component3) {
     key: 'fetchMyNotes',
     value: function fetchMyNotes() {
 
-      fetch('/notes').then(function (response) {
+      fetch('/mynotes').then(function (response) {
         return response.json();
       }).then(function (json) {
         console.log(json);

@@ -9,8 +9,7 @@ const MongoClient = mongodb.MongoClient;
 let app = express();
 let database = "mongodb://localhost:3000/";
 
-app.use(express.urlencoded({extended: true}));
-app.use(express.json());
+app.use(bodyparser.urlencoded({extended: true}));
 
 function quickNotesApp(port){
 

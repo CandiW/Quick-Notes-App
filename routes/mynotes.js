@@ -10,7 +10,7 @@ module.exports = (app,mongoUrl) => {
             let retrievedNotes = db.collection('notes').find();
             console.log(retrievedNotes);
             res.status(200);
-            res.json(retrievedNotes);
+            res.send(retrievedNotes);
 
         });
     

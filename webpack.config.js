@@ -1,26 +1,15 @@
-var webpack = require('webpack');
-var path = require('path');
-
-var config = {
-  entry: {
-      app: './routes/index.js'
+Module.exports = {
+  Entry: "./routes/server.js",
+  Output: {
+    Path: __dirname + "/public",
+    Filename: 'bundle.js'
   },
-  output: {
-    path: __dirname + "/public",
-    filename: 'build/bundle.js'
-  },
-  module : {
-    loaders : [
+  Module: {
+    Loaders: [
       {
-        test : /\.jsx?/,
-        loader : 'babel-loader',
-        exclude: '/node_modules',
-        query: {
-            "presets" : ["es2015", "react"]
-          }
+        Test: /\.js$/,
+        Loader: 'babel-loader'
       }
     ]
   }
 };
-
-module.exports = config;

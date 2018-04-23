@@ -19,7 +19,7 @@ class Notes extends Component {
 }
 
 let defaultStyle = {
-  backgroundColor: "yellow",
+  backgroundColor: RandomColor(),
   opacity: ".7",
   borderLeft: "5px solid " + RandomColor(),
   color: "black"
@@ -70,7 +70,7 @@ class App extends Component {
 
  fetchMyNotes(){
    
-    fetch('/notes').then(function(response) {
+    fetch('/mynotes').then(function(response) {
       return response.json();
     }).then(function(json) {
       console.log(json);
