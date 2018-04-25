@@ -36,7 +36,7 @@ class NewNote extends Component {
             <div className="form-group">
             <form action="/notes" method="POST" encType="multipart/form-data">
               <label htmlFor="newNote">New Note:</label>
-                <textarea type="text" name="noteText" className="form-control" rows="10" id="newNote"></textarea>
+                <input type="text" name="noteText" className="form-control" rows="5" id="newNote" placeholder="Write your note here..."></input>
                 <button id="done" type="submit" className="btn btn-primary pull-right">Done</button>
                 <button id="cancel" className="btn btn-warning pull-right">Cancel</button>
             </form>
@@ -154,6 +154,11 @@ class App extends Component {
         <NewNote style={this.state.colorTheme} />
         <div>
             <Notes text="Hello" date="4/11/18" colorTheme={this.state.colorTheme}/>
+            {
+              this.state.myNotes.forEach((el) => {
+                return <Notes text={el.text} date={el.date} colorTheme={this.state.colorTheme} />
+              })
+            }
         </div>
     </div>
     )

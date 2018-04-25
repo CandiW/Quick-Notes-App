@@ -7,11 +7,11 @@ module.exports = (app,mongoUrl) => {
 
         MongoDB.connect(mongoUrl,function(err,db){
 
-            let retrievedNotes = db.collection('notes').find();
-            console.log(retrievedNotes);
-            res.status(200);
-            res.send(retrievedNotes);
-
+            db.collection('notes').find({}).toArray((err,docs) => {
+                console.log(docs);
+                res.status(200);
+                res.send(docs);    
+            });
         });
     
     });
