@@ -19,6 +19,7 @@ module.exports = (app,mongoUrl) => {
        
                 let notesCollection = db.collection('notes');
                 notesCollection.insert(noteData);
+                // eslint-disable-next-line no-console
                 console.log(noteData);
                 db.close();
         });

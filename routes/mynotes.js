@@ -8,6 +8,7 @@ module.exports = (app,mongoUrl) => {
         MongoDB.connect(mongoUrl,function(err,db){
 
             db.collection('notes').find({}).toArray((err,docs) => {
+                // eslint-disable-next-line no-console
                 console.log(docs);
                 res.status(200);
                 res.send(docs);    

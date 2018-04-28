@@ -12,7 +12,7 @@ let database = "mongodb://localhost:3000/";
 app.use(bodyparser.urlencoded({extended: true}));
 
 function quickNotesApp(port){
-
+    // eslint-disable-next-line no-console
     console.log("listening on port " + port);
     app.use(express.static('public'));
 
