@@ -36,7 +36,7 @@ class NewNote extends Component {
             <div className="form-group">
             <form action="/notes" method="POST" encType="multipart/form-data">
               <label htmlFor="newNote">New Note:</label>
-                <input type="text" name="noteText" className="form-control" rows="5" id="newNote" placeholder="Write your note here..."></input>
+                <input type="text" name="name" className="form-control" rows="5" id="newNote" placeholder="Write your note here..."></input>
                 <button id="done" type="submit" className="btn btn-primary pull-right">Done</button>
                 <button id="cancel" className="btn btn-warning pull-right">Cancel</button>
             </form>

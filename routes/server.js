@@ -1,6 +1,5 @@
 const express = require('express');
 const path = require('path');
-const bodyparser = require('body-parser');
 const notes = require('./notes.js');
 const myNotes = require('./mynotes.js');
 const mongodb = require('mongodb');
@@ -8,8 +7,6 @@ const MongoClient = mongodb.MongoClient;
 
 let app = express();
 let database = "mongodb://localhost:3000/";
-
-app.use(bodyparser.urlencoded({extended: true}));
 
 function quickNotesApp(port){
     // eslint-disable-next-line no-console
