@@ -1,14 +1,14 @@
-Module.exports = {
-  Entry: "./routes/server.js",
-  Output: {
-    Path: __dirname + "/public",
-    Filename: 'bundle.js'
+module.exports = {
+  entry: "./routes/server.js",
+  output: {
+    path: __dirname + "/public",
+    filename: 'bundle.js'
   },
-  Module: {
-    Loaders: [
+  module: {
+    loaders: [
       {
-        Test: /\.js$/,
-        Loader: 'babel-loader'
+        test: /\.js$/,
+        loader: 'babel-loader'
       }
     ]
   }
