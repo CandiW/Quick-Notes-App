@@ -1,10 +1,8 @@
 //posting notes to backend and storing in db
 module.exports = (app,mongoUrl) => {
 
-    const bodyparser = require('body-parser');
-
+    
     let MongoDB = require('mongodb').MongoClient;
-    app.use(bodyparser.urlencoded({extended: true}));
 
     app.post('/notes',function(req,res){
         //posting the note just fine, just not receiving the note text (says undefined)
@@ -12,6 +10,7 @@ module.exports = (app,mongoUrl) => {
 
         //send response to append note to page
         //store note data in db
+        
         let noteData = {
             text: req.body.name,
             date: new Date().toDateString()
@@ -21,8 +20,6 @@ module.exports = (app,mongoUrl) => {
        
                 let notesCollection = db.collection('notes');
                 notesCollection.insert(noteData);
-                // eslint-disable-next-line no-console
-                console.log(noteData);
                 db.close();
         });
 

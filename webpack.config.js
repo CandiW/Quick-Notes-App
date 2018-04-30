@@ -46,7 +46,9 @@ const config = {
 
   target: 'node',
 
-  externals: [nodeExternals()]
+  externals: [nodeExternals({
+    whitelist: ['express', 'mongodb', 'body-parser', 'react', 'react-dom', 'random-color']
+  })]
 
 };
 

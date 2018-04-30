@@ -70,12 +70,24 @@ class App extends Component {
 
  fetchMyNotes(){
    
-    fetch('/mynotes').then(function(response) {
-      return response.json();
-    }).then(function(json) {
-      console.log(json);
-      this.setState({myNotes: json});
-    });
+    fetch('/mynotes', {
+    method: 'get',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    }
+  })
+  .then((response) => response.json())
+  .then((responseJson) => {
+    if (responseJson.success) {
+      this.setState({myNotes: responseJSON})
+    }
+    else this.setState({myNotes: responseJSON})
+    console.log(this.state.myNotes);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
 
  }
  

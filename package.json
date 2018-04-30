@@ -21,18 +21,17 @@
   "homepage": "https://github.com/CandiW/quick-notes-app#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
-    "express": "^4.16.2",
-    "masonry-layout": "^4.2.1",
-    "mongodb": "^2.2.33",
+    "express": "^4.16.3",
+    "mongodb": "^2.2.35",
     "randomcolor": "^0.5.3",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.0",
+    "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.3",
-    "babel-loader": "^7.1.2",
+    "babel-loader": "^7.1.4",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "eslint": "^4.19.1",
