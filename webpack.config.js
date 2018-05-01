@@ -1,14 +1,14 @@
-const webpack = require('webpack');
+var webpack = require('webpack');
 
-const path = require('path');
+var path = require('path');
 
-const nodeExternals = require('webpack-node-externals');
 
-const config = {
+
+var config = {
 
   entry: {
 
-      app: './routes/server.js'
+      app: './routes/index.js'
 
   },
 
@@ -22,7 +22,7 @@ const config = {
 
   module : {
 
-    rules : [
+    loaders : [
 
       {
 
@@ -30,7 +30,7 @@ const config = {
 
         loader : 'babel-loader',
 
-        exclude: /node_modules/,
+        exclude: '/node_modules',
 
         query: {
 
@@ -42,14 +42,10 @@ const config = {
 
     ]
 
-  },
-
-  target: 'node',
-
-  externals: [nodeExternals({
-    whitelist: ['express', 'mongodb', 'body-parser', 'react', 'react-dom', 'random-color']
-  })]
+  }
 
 };
+
+
 
 module.exports = config;

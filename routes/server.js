@@ -9,6 +9,7 @@ const MongoClient = mongodb.MongoClient;
 let app = express();
 let database = "mongodb://localhost:3000/";
 app.use(bodyparser.urlencoded({extended: true}));
+app.use(bodyparser.json());
 
 function quickNotesApp(port){
     // eslint-disable-next-line no-console
