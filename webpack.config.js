@@ -1,10 +1,8 @@
-var webpack = require('webpack');
+const webpack = require('webpack');
 
-var path = require('path');
+const path = require('path');
 
-
-
-var config = {
+const config = {
 
   entry: {
 
