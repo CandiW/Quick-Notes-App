@@ -1,7 +1,10 @@
 //for getting notes from db
-module.exports = (app,mongoUrl) => {
+module.exports = (app,bodyparser,mongoUrl) => {
 
     let MongoDB = require('mongodb').MongoClient;
+    app.use(bodyparser.urlencoded({extended: false}));
+    app.use(bodyparser.json());
+
 
     app.get('/mynotes',function(req,res){
 
