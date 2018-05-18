@@ -6,7 +6,7 @@ module.exports = (app,bodyparser,mongoUrl) => {
     app.use(bodyparser.urlencoded({extended: false}));
     app.use(bodyparser.json());
     
-    app.post('/notes',function(req,res){
+  app.post('/notes',function(req,res){
         //posting the note just fine, just not receiving the note text (says undefined)
         //not getting note text for some reason?? only returning the date...
 
@@ -14,21 +14,26 @@ module.exports = (app,bodyparser,mongoUrl) => {
         //store note data in db
         
         let noteData = {
-            text: req.body.name,
+            text: req.body.text,
             date: new Date().toDateString()
         };
-
+        console.log(req.body);
         MongoDB.connect(mongoUrl,function(err,db){
-       
+            
+            if(err){console.log(err);}
+
                 let notesCollection = db.collection('notes');
                 notesCollection.insert(noteData);
                 db.close();
         });
 
-        res.status(201).send(noteData);
+        res.set('Content-Type', 'Application/json');
+        res.status(201).json(noteData);
 
     });
 
-}
 
 //C:\Program Files\MongoDB\Server\3.4\bin
+
+
+}

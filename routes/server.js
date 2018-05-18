@@ -7,10 +7,10 @@ const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
 
 let app = express();
-let database = "mongodb://localhost:3000/";
+let database = "mongodb://localhost:3000/notes";
 
     app.use(express.static('public'));
-    app.use(bodyparser.urlencoded({extended: false}));
+    app.use(bodyparser.urlencoded({extended: true}));
     app.use(bodyparser.json());
 
 function quickNotesApp(port){

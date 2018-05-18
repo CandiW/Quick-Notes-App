@@ -902,18 +902,55 @@ var defaultStyle = {
 var NewNote = function (_Component2) {
   _inherits(NewNote, _Component2);
 
+  //this is for creating a new note only
+  //need post request for this one
+  //need to clear textarea upon submit or cancel
+
   function NewNote() {
     _classCallCheck(this, NewNote);
 
-    return _possibleConstructorReturn(this, (NewNote.__proto__ || Object.getPrototypeOf(NewNote)).apply(this, arguments));
+    var _this2 = _possibleConstructorReturn(this, (NewNote.__proto__ || Object.getPrototypeOf(NewNote)).call(this));
+
+    _this2.state = {
+      text: ""
+    };
+    _this2.handleSubmitText = _this2.handleSubmitText.bind(_this2);
+    _this2.addNote = _this2.addNote.bind(_this2);
+    return _this2;
   }
 
   _createClass(NewNote, [{
-    key: 'render',
+    key: 'handleSubmitText',
+    value: function handleSubmitText(e) {
+      e.preventDefault();
+      this.setState({ text: e.target.value });
+      var text = this.state.text;
+    }
+  }, {
+    key: 'addNote',
+    value: function addNote(e) {
+      var _this3 = this;
 
-    //this is for creating a new note only
-    //need post request for this one
-    //need to clear textarea upon submit or cancel
+      e.preventDefault();
+      this.setState({ text: e.target.value });
+      fetch('mongodb://localhost:3000/notes', {
+        method: 'POST',
+        body: JSON.stringify(text),
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        })
+      }).then(function (res) {
+        return res.json();
+      }).catch(function (error) {
+        console.error('Error:', error);
+        _this3.setState({ text: "" });
+      }).then(function (response) {
+        console.log('Success:', response);
+        _this3.setState({ text: "" });
+      });
+    }
+  }, {
+    key: 'render',
     value: function render() {
       return _react2.default.createElement(
         'div',
@@ -926,16 +963,16 @@ var NewNote = function (_Component2) {
             { className: 'form-group' },
             _react2.default.createElement(
               'form',
-              { action: '/notes', method: 'POST', encType: 'multipart/form-data' },
+              null,
               _react2.default.createElement(
                 'label',
                 { htmlFor: 'newNote' },
                 'New Note:'
               ),
-              _react2.default.createElement('input', { type: 'text', name: 'name', className: 'form-control', rows: '5', id: 'newNote', placeholder: 'Write your note here...' }),
+              _react2.default.createElement('input', { type: 'text', name: 'text', className: 'form-control', rows: '5', id: 'text', placeholder: 'Write your note here...', onChange: this.handleSubmitText, value: this.state.text }),
               _react2.default.createElement(
                 'button',
-                { id: 'done', type: 'submit', className: 'btn btn-primary pull-right' },
+                { id: 'done', type: 'submit', className: 'btn btn-primary pull-right', onClick: this.addNote },
                 'Done'
               ),
               _react2.default.createElement(
@@ -953,36 +990,42 @@ var NewNote = function (_Component2) {
   return NewNote;
 }(_react.Component);
 
-var sampleNote = {
-  text: "Sample Text",
-  date: new Date()
-};
-
 var App = function (_Component3) {
   _inherits(App, _Component3);
 
   function App() {
     _classCallCheck(this, App);
 
-    var _this3 = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
+    var _this4 = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
 
-    _this3.state = {
+    _this4.state = {
       showHide: false,
       colorTheme: defaultStyle,
       myNotes: []
     };
-    _this3.showHide = _this3.showHide.bind(_this3);
-    _this3.colorTheme = _this3.colorTheme.bind(_this3);
-    return _this3;
+    _this4.showHide = _this4.showHide.bind(_this4);
+    _this4.colorTheme = _this4.colorTheme.bind(_this4);
+    _this4.fetchMyNotes = _this4.fetchMyNotes.bind(_this4);
+    return _this4;
   }
 
   _createClass(App, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      //uncomment this when ready!!
+
+      /*
+      this.fetchMyNotes();
+      */
+    }
+  }, {
     key: 'fetchMyNotes',
     value: function fetchMyNotes() {
-      var _this4 = this;
+      var _this5 = this;
 
-      fetch('/mynotes', {
-        method: 'get',
+      //will not fetch from local db, needs to be http
+      fetch('mongodb://localhost:3000/notes', {
+        method: 'GET',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
@@ -991,9 +1034,10 @@ var App = function (_Component3) {
         return response.json();
       }).then(function (responseJson) {
         if (responseJson.success) {
-          _this4.setState({ myNotes: responseJSON });
-        } else _this4.setState({ myNotes: responseJSON });
-        console.log(_this4.state.myNotes);
+          _this5.setState({ myNotes: responseJSON });
+          console.log(_this5.state.myNotes);
+        } else _this5.setState({ myNotes: responseJSON });
+        console.log(_this5.state.myNotes);
       }).catch(function (error) {
         console.error(error);
       });
@@ -1054,9 +1098,10 @@ var App = function (_Component3) {
   }, {
     key: 'render',
     value: function render() {
-      var _this5 = this;
+      var _this6 = this;
 
       var noteStyle = this.state.colorTheme;
+      var notes = this.state.myNotes;
 
       return _react2.default.createElement(
         'div',
@@ -1074,28 +1119,28 @@ var App = function (_Component3) {
           _react2.default.createElement(
             'button',
             { id: 'dark-theme', className: 'btn', onClick: function onClick() {
-                return _this5.colorTheme("dark");
+                return _this6.colorTheme("dark");
               } },
             'Dark'
           ),
           _react2.default.createElement(
             'button',
             { id: 'light-theme', className: 'btn', onClick: function onClick() {
-                return _this5.colorTheme("light");
+                return _this6.colorTheme("light");
               } },
             'Light'
           ),
           _react2.default.createElement(
             'button',
             { id: 'purple-theme', className: 'btn', onClick: function onClick() {
-                return _this5.colorTheme("purple");
+                return _this6.colorTheme("purple");
               } },
             'Purple'
           ),
           _react2.default.createElement(
             'button',
             { id: 'surpriseme-theme', className: 'btn', onClick: function onClick() {
-                return _this5.colorTheme("surpriseme");
+                return _this6.colorTheme("surpriseme");
               } },
             'Surprise Me!'
           )
@@ -1124,8 +1169,8 @@ var App = function (_Component3) {
           'div',
           null,
           _react2.default.createElement(Notes, { text: 'Hello', date: '4/11/18', colorTheme: this.state.colorTheme }),
-          this.state.myNotes.forEach(function (el) {
-            return _react2.default.createElement(Notes, { text: el.text, date: el.date, colorTheme: _this5.state.colorTheme });
+          notes.forEach(function (el) {
+            return _react2.default.createElement(Notes, { text: el.text, date: el.date, colorTheme: _this6.state.colorTheme });
           })
         )
       );

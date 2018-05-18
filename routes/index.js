@@ -29,15 +29,53 @@ class NewNote extends Component {
 //this is for creating a new note only
 //need post request for this one
 //need to clear textarea upon submit or cancel
+
+constructor(){
+  super();
+  this.state = {
+     text: ""
+  };
+  this.handleSubmitText = this.handleSubmitText.bind(this);
+  this.addNote = this.addNote.bind(this);
+}
+
+handleSubmitText(e){
+  e.preventDefault();
+  this.setState({text: e.target.value});
+  let text = this.state.text;
+
+}
+
+addNote(e){
+  e.preventDefault();
+  this.setState({text: e.target.value});
+  fetch('mongodb://localhost:3000/notes', {
+    method: 'POST',
+    body: JSON.stringify(text),
+    headers: new Headers({
+      'Content-Type': 'application/json'
+    })
+  }).then(res => res.json())
+  .catch(error => {
+    console.error('Error:', error);
+    this.setState({text: ""});
+  })
+  .then(response => {
+    console.log('Success:', response);
+    this.setState({text: ""});
+  });  
+
+}
+
     render(){
       return (
         <div id="form-container" className='container-fluid' style={defaultStyle}>
           <div id="form">
             <div className="form-group">
-            <form action="/notes" method="POST" encType="multipart/form-data">
+            <form>
               <label htmlFor="newNote">New Note:</label>
-                <input type="text" name="name" className="form-control" rows="5" id="newNote" placeholder="Write your note here..."></input>
-                <button id="done" type="submit" className="btn btn-primary pull-right">Done</button>
+                <input type="text" name="text" className="form-control" rows="5" id="text" placeholder="Write your note here..." onChange={this.handleSubmitText} value={this.state.text}></input>
+                <button id="done" type="submit" className="btn btn-primary pull-right" onClick={this.addNote}>Done</button>
                 <button id="cancel" className="btn btn-warning pull-right">Cancel</button>
             </form>
             </div>
@@ -47,11 +85,6 @@ class NewNote extends Component {
     }
 
 }
-
-let sampleNote = {
-  text: "Sample Text",
-  date: new Date()
-};
 
 class App extends Component {
 
@@ -64,14 +97,21 @@ class App extends Component {
     };
     this.showHide = this.showHide.bind(this);
     this.colorTheme = this.colorTheme.bind(this);
+    this.fetchMyNotes = this.fetchMyNotes.bind(this);
  }
  
+componentDidMount(){
+  //uncomment this when ready!!
 
+  /*
+  this.fetchMyNotes();
+  */
+}
 
  fetchMyNotes(){
-   
-    fetch('/mynotes', {
-    method: 'get',
+   //will not fetch from local db, needs to be http
+    fetch('mongodb://localhost:3000/notes', {
+    method: 'GET',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -81,6 +121,7 @@ class App extends Component {
   .then((responseJson) => {
     if (responseJson.success) {
       this.setState({myNotes: responseJSON})
+      console.log(this.state.myNotes);
     }
     else this.setState({myNotes: responseJSON})
     console.log(this.state.myNotes);
@@ -149,7 +190,8 @@ class App extends Component {
 
   render(){
     let noteStyle = this.state.colorTheme;
-    
+    let notes = this.state.myNotes;
+
     return (
       <div className='container-fluid'>
         <h1 className='text-center'>Quick Notes App</h1>
@@ -167,7 +209,7 @@ class App extends Component {
         <div>
             <Notes text="Hello" date="4/11/18" colorTheme={this.state.colorTheme}/>
             {
-              this.state.myNotes.forEach((el) => {
+              notes.forEach((el) => {
                 return <Notes text={el.text} date={el.date} colorTheme={this.state.colorTheme} />
               })
             }
