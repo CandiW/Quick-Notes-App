@@ -7,7 +7,8 @@ const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
 
 let app = express();
-let database = "mongodb://localhost:3000/notes";
+//mLab database url here
+let database = "mongodb://username:password1@ds141514.mlab.com:41514/quick-notes-app'";
 
     app.use(express.static('public'));
     app.use(bodyparser.urlencoded({extended: true}));

@@ -49,7 +49,7 @@ handleSubmitText(e){
 addNote(e){
   e.preventDefault();
   this.setState({text: e.target.value});
-  fetch('mongodb://localhost:3000/notes', {
+  fetch('mongodb://username:password1@ds141514.mlab.com:41514/quick-notes-app', {
     method: 'POST',
     body: JSON.stringify(text),
     headers: new Headers({
@@ -110,7 +110,7 @@ componentDidMount(){
 
  fetchMyNotes(){
    //will not fetch from local db, needs to be http
-    fetch('mongodb://localhost:3000/notes', {
+    fetch('mongodb://username:password1@ds141514.mlab.com:41514/quick-notes-app', {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
