@@ -25,4 +25,4 @@ function quickNotesApp(port){
     
 }
 
-quickNotesApp(3000);
+quickNotesApp(process.env.PORT);
