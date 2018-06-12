@@ -8,7 +8,7 @@ const MongoClient = mongodb.MongoClient;
 
 let app = express();
 //mLab database url here
-let database = "mongodb://username:password1@ds141514.mlab.com:41514/quick-notes-app'";
+let database = 'mongodb://'+process.env.USER+':'+process.env.PASS+'@'+process.env.HOST+':'+process.env.PORT+'/'+process.env.DB;
 
     app.use(express.static('public'));
     app.use(bodyparser.urlencoded({extended: true}));
@@ -25,4 +25,4 @@ function quickNotesApp(port){
     
 }
 
-quickNotesApp(process.env.PORT);
+quickNotesApp(3000);
