@@ -16,7 +16,7 @@ module.exports = (app,bodyparser,mongoUrl) => {
 
             db.collection('notes').find({}).toArray((err,docs) => {
                 res.status(200);
-                res.json(docs);    
+                res.send(docs);    
             });
         });
     

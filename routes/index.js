@@ -49,9 +49,10 @@ handleSubmitText(e){
 addNote(e){
   e.preventDefault();
   this.setState({text: e.target.value});
+  let text = this.state.text;
   fetch('mongodb://'+process.env.USER+':'+process.env.PASS+'@'+process.env.HOST+':'+process.env.PORT+'/'+process.env.DB, {
     method: 'POST',
-    body: JSON.stringify(text),
+    body: text,
     headers: new Headers({
       'Content-Type': 'application/json'
     })
@@ -123,8 +124,9 @@ componentDidMount(){
       this.setState({myNotes: responseJSON})
       console.log(this.state.myNotes);
     }
-    else this.setState({myNotes: responseJSON})
-    console.log(this.state.myNotes);
+    else {
+    console.log("Here's what the state looks like:" + this.state.myNotes);
+    }
   })
   .catch((error) => {
     console.error(error);

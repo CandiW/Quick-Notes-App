@@ -28,7 +28,7 @@ module.exports = (app,bodyparser,mongoUrl) => {
         });
 
         res.set('Content-Type', 'Application/json');
-        res.status(201).json(noteData);
+        res.send(noteData);
 
     });
 
