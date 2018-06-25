@@ -832,7 +832,7 @@ module.exports = containsNode;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
+/* WEBPACK VAR INJECTION */(function(process) {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -933,9 +933,10 @@ var NewNote = function (_Component2) {
 
       e.preventDefault();
       this.setState({ text: e.target.value });
-      fetch('mongodb://username:password1@ds141514.mlab.com:41514/quick-notes-app', {
+      var text = this.state.text;
+      fetch('mongodb://' + process.env.USER + ':' + process.env.PASS + '@' + process.env.HOST + ':' + process.env.PORT + '/' + process.env.DB, {
         method: 'POST',
-        body: JSON.stringify(text),
+        body: text,
         headers: new Headers({
           'Content-Type': 'application/json'
         })
@@ -1024,7 +1025,7 @@ var App = function (_Component3) {
       var _this5 = this;
 
       //will not fetch from local db, needs to be http
-      fetch('mongodb://username:password1@ds141514.mlab.com:41514/quick-notes-app', {
+      fetch('mongodb://' + process.env.USER + ':' + process.env.PASS + '@' + process.env.HOST + ':' + process.env.PORT + '/' + process.env.DB, {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
@@ -1036,8 +1037,9 @@ var App = function (_Component3) {
         if (responseJson.success) {
           _this5.setState({ myNotes: responseJSON });
           console.log(_this5.state.myNotes);
-        } else _this5.setState({ myNotes: responseJSON });
-        console.log(_this5.state.myNotes);
+        } else {
+          console.log("Here's what the state looks like:" + _this5.state.myNotes);
+        }
       }).catch(function (error) {
         console.error(error);
       });
@@ -1181,6 +1183,7 @@ var App = function (_Component3) {
 }(_react.Component);
 
 _reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('app'));
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
 /* 13 */
