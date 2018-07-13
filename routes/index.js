@@ -4,6 +4,9 @@ import ReactDOM from 'react-dom'
 import RandomColor from 'randomcolor'
 
 
+//const PATH = 'mongodb://'+process.env.USER+':'+process.env.PASS+'@'+process.env.HOST+':'+process.env.PORT+'/'+process.env.DB;
+const PATH = 'mongodb://localhost:3000/notes';
+
 class Notes extends Component {
   //this is for displaying notes
     render(){
@@ -50,7 +53,7 @@ addNote(e){
   e.preventDefault();
   this.setState({text: e.target.value});
   let text = this.state.text;
-  fetch('mongodb://'+process.env.USER+':'+process.env.PASS+'@'+process.env.HOST+':'+process.env.PORT+'/'+process.env.DB, {
+  fetch(PATH, {
     method: 'POST',
     body: text,
     headers: new Headers({
@@ -111,7 +114,7 @@ componentDidMount(){
 
  fetchMyNotes(){
    //will not fetch from local db, needs to be http
-    fetch('mongodb://'+process.env.USER+':'+process.env.PASS+'@'+process.env.HOST+':'+process.env.PORT+'/'+process.env.DB, {
+    fetch(PATH, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',

@@ -8,7 +8,8 @@ const MongoClient = mongodb.MongoClient;
 
 let app = express();
 //mLab database url here
-let database = 'mongodb://'+process.env.USER+':'+process.env.PASS+'@'+process.env.HOST+':'+process.env.PORT+'/'+process.env.DB;
+//let database = 'mongodb://'+process.env.USER+':'+process.env.PASS+'@'+process.env.HOST+':'+process.env.PORT+'/'+process.env.DB;
+let database = 'mongodb://localhost:3000/';
 
     app.use(express.static('public'));
     app.use(bodyparser.urlencoded({extended: true}));
